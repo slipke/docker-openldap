@@ -1,0 +1,28 @@
+ldap:
+  image: osixia/openldap
+  hostname: ldap.ubuntu.local
+  ports:
+    - 389:389
+    - 636:636
+  environment:
+    LDAP_LOG_LEVEL: 256
+    LDAP_ORGANISATION: Example Inc
+    LDAP_DOMAIN: ldap.ubuntu.local
+    LDAP_ADMIN_PASSWORD: admin
+    LDAP_CONFIG_PASSWORD: config
+    LDAP_READONLY_USER: 'false'
+    LDAP_READONLY_USER_USERNAME: readonly
+    LDAP_READONLY_USER_PASSWORD: readonly
+
+ldapadmin:
+  image: osixia/phpldapadmin
+  ports:
+    - 80
+    - 443
+  hostname: phpldapadmin.ubuntu.local
+  links:
+    - ldap:ldap.ubuntu.local
+  environment:
+    PHPLDAPADMIN_SERVER_ADMIN: webmaster@ubuntu.local
+    PHPLDAPADMIN_HTTPS: 'true'
+    PHPLDAPADMIN_LDAP_HOSTS: ldap.ubuntu.local

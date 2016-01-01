@@ -1,0 +1,2 @@
+FROM osixia/openldap
+
