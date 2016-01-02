@@ -1,0 +1,20 @@
+ldap:
+  hostname: ldap.ubuntu.local
+  environment:
+    LDAP_LOG_LEVEL: 256
+    LDAP_ORGANISATION: Example Inc
+    LDAP_DOMAIN: ldap.ubuntu.local
+    LDAP_ADMIN_PASSWORD: 'Secr3t'
+    LDAP_CONFIG_PASSWORD: 'c0nf!g'
+    LDAP_READONLY_USER: 'true'
+    LDAP_READONLY_USER_USERNAME: readonly
+    LDAP_READONLY_USER_PASSWORD: 'r34d0nly!'
+
+ldapadmin:
+  hostname: phpldapadmin.ubuntu.local
+  links:
+    - ldap:ldap.ubuntu.local
+  environment:
+    PHPLDAPADMIN_SERVER_ADMIN: webmaster@ubuntu.local
+    PHPLDAPADMIN_HTTPS: 'true'
+    PHPLDAPADMIN_LDAP_HOSTS: ldap.ubuntu.local
